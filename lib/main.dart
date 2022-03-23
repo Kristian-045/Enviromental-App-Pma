@@ -20,8 +20,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        primaryColor: Colors.green,
+        textTheme: const TextTheme(
+          headline1: TextStyle(fontSize: 45, fontWeight: FontWeight.normal,color: Colors.black ),
+          bodyText1: TextStyle(fontSize:20, color: Colors.black)
+        ),
 
-        primarySwatch: Colors.blue,
+        // primary&Swatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Login'),
     );
@@ -37,7 +42,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String token = "";
-  String text = "hi please wait a second";
+  String text = "Logo";
   // late Future<User> futureUser;
   // late Future<UserWithToken> futureUserWithToken;
 
@@ -46,9 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _loadTokenLocal();
-
-
-
   }
   Future<User> saveUserDetails(String token) async {
     final prefs = await SharedPreferences.getInstance();
@@ -69,16 +71,16 @@ class _MyHomePageState extends State<MyHomePage> {
     try{
       var user = await  saveUserDetails(token).timeout(const Duration(seconds: 2));
       if(token!="0"){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> MainHome(name: user.name,)));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MainHome(name: user.name,)));
 
       }else{
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Login()));
       }
     }
     on Exception catch(e){
       if(e.toString() == "Exception: Failed to load user"){
         print('i catch that');
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login()));
       }else{
         setState(() {
           text="no internet, please connect to the internet";
@@ -101,10 +103,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),*/
       body:
         Container(
-          color: Colors.teal,
           alignment: Alignment.center,
           padding: EdgeInsets.only(top: 50 ,left:20,right: 20 ),
-          child: Text(text,style: TextStyle(color: Colors.white,fontSize: 25),)
+          child: Text(text,style: Theme.of(context).textTheme.bodyText1,)
         ),
 
 

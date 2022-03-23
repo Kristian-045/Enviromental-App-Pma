@@ -39,7 +39,7 @@ class User {
 }
 Future<User> fetchUser(String token) async {
   final response = await http
-      .get(Uri.parse('http://10.0.2.2:8000/api/user'),
+      .get(Uri.parse('http://sl-print.eu/public/api/user'),
       headers:{
         "Content-type": "application/json",
         "Accept": "application/json",

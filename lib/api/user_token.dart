@@ -31,7 +31,7 @@ class UserWithToken {
 Future<UserWithToken> fetchUserToken(String email,String password) async {
 
   final response = await http
-      .post(Uri.parse('http://10.0.2.2:8000/api/login'),
+      .post(Uri.parse('http://sl-print.eu/public/api/login'),
       headers:{
         // "Content-type": "application/json",
         // "Accept": "application/json",
