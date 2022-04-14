@@ -3,7 +3,9 @@ import 'package:auth/api/user_data.dart';
 import 'package:auth/api/user_token.dart';
 import 'package:auth/home/components/home_body.dart';
 import 'package:auth/home/main_home.dart';
+import 'package:auth/introduction/main_introduction.dart';
 import 'package:auth/login/main_login.dart';
+import 'package:auth/register/main_register.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Colors.green,
+        // secondaryColor: Colors.green,
         textTheme: const TextTheme(
           headline1: TextStyle(fontSize: 45, fontWeight: FontWeight.normal,color: Colors.black ),
           bodyText1: TextStyle(fontSize:20, color: Colors.black)
@@ -56,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final prefs = await SharedPreferences.getInstance();
     final user = await fetchUser(token);
 
-    prefs.setString("name", user.name+"o");
+    prefs.setString("name", user.name);
     print('set the other values too ');
 
     return user;
@@ -64,24 +67,30 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _loadTokenLocal() async {
     final prefs = await SharedPreferences.getInstance();
+    //len zatial kym robim register
+    // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const Register()));
+
     setState(() {
       token = (prefs.getString('token') ?? "0");
 
     });
     try{
-      var user = await  saveUserDetails(token).timeout(const Duration(seconds: 2));
-      if(token!="0"){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MainHome(name: user.name,)));
 
+      if(token!="0"){
+        var user = await  saveUserDetails(token).timeout(const Duration(seconds: 15));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MainHome(name: user.name,)));
       }else{
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Login()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const Introduction()));
       }
     }
     on Exception catch(e){
       if(e.toString() == "Exception: Failed to load user"){
         print('i catch that');
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login()));
-      }else{
+      }
+      else{
+        print("helo that is error");
+        print(e);
         setState(() {
           text="no internet, please connect to the internet";
         });
@@ -89,10 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     }
 
-
-
   }
-
 
 
   @override
@@ -108,16 +114,6 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text(text,style: Theme.of(context).textTheme.bodyText1,)
         ),
 
-
-
-      // Column(
-      //   children: [
-      //     Login(futureUser: futureUser,
-      //       futureUserWithToken: futureUserWithToken,
-      //       token: token,),
-      //
-      //   ],
-      // ),
 
     );
   }
