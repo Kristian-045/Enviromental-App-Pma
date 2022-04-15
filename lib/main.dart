@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: Colors.green,
+        primaryColor: const Color(0xff399d43),
         // secondaryColor: Colors.green,
         textTheme: const TextTheme(
           headline1: TextStyle(fontSize: 45, fontWeight: FontWeight.normal,color: Colors.black ),

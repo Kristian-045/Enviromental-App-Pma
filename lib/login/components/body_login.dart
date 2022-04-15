@@ -1,3 +1,5 @@
+import 'package:auth/auth/components/button.dart';
+import 'package:auth/auth/components/input.dart';
 import 'package:auth/home/main_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -59,80 +61,28 @@ class BodyLogin extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          Container(
-                            child: TextField(
-                              cursorColor: Colors.black,
-                              textAlign: TextAlign.center,
-                              controller: emailController,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                hintText: 'E-mail',
-                                hintStyle: TextStyle(color: Theme.of(context).primaryColor),
-                                contentPadding: const EdgeInsets.symmetric(vertical: 10 ,horizontal: 20),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black,width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black,width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                              ),
-                            ),
-                          ),
+                          Input(controller: emailController, text: "E-mail"),
                           Padding(padding: const EdgeInsets.only(top: 13)),
-                          Container(
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              cursorColor: Colors.black,
-                              obscureText: true,
-                              enableSuggestions: false,
-                              autocorrect: false,
-                              controller: passwordController,
-                              decoration:  InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                hintStyle: TextStyle(color: Theme.of(context).primaryColor),
-                                hintText: "Heslo",
-                                contentPadding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.black,width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.black,width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                              ),
-                            ),
-                          ),
+                          Input(controller: passwordController, text: "Heslo"),
+
                           Padding(
                             padding: const EdgeInsets.only(top: 30),
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  // primary:  const Color.fromRGBO(16, 124, 190, 1.0)
-                                    primary:  Theme.of(context).primaryColor,
-                                    padding:const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15)
-                                    )
-                                ),
-                                onPressed: () async {
-                                  try{
-                                    var user_data = await fetchUserToken(emailController.text,passwordController.text).timeout(const Duration(seconds: 5));
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MainHome(name: user_data.name)));
-                                  }
-                                  on Exception catch(e){}
-                                },
-                                child: Text("Prihlásiť sa",style: TextStyle(fontSize: 17,),)),
+                            child:
+                            Button(onPressfunction: () async {
+                                try{
+                                  var user_data = await fetchUserToken(emailController.text,passwordController.text).timeout(const Duration(seconds: 5));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MainHome(name: user_data.name)));
+                                }
+                                on Exception catch(e){}
+                              }, text: 'Prihlásiť sa', color: true,)
+
                           ),
                           Padding(padding: EdgeInsets.only(top: 8)),
-                          Text("Vytvoriť účet",
+                          const Text("Vytvoriť účet",
                             style: TextStyle(
                               // color: Theme.of(context).primaryColor,
-                                color: Colors.black,
-                                decoration: TextDecoration.underline
+                              color: Colors.black,
+                              decoration: TextDecoration.underline
                             ),
                           )
 

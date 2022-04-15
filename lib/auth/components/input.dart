@@ -1,3 +1,4 @@
+import 'package:auth/home/components/custom_color_scheme.dart';
 import 'package:flutter/material.dart';
 class Input extends StatelessWidget {
   final TextEditingController controller;
@@ -24,11 +25,11 @@ class Input extends StatelessWidget {
           hintText: text,
           contentPadding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black,width: 2),
+            borderSide: const BorderSide(color: Colors.black45,width: 2),
             borderRadius: BorderRadius.circular(15),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black,width: 2),
+            borderSide: BorderSide(color: Theme.of(context).colorScheme.mutedColor,width: 2),
             borderRadius: BorderRadius.circular(15),
           ),
         ),

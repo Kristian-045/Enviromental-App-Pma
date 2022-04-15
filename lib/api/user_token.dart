@@ -58,6 +58,7 @@ Future<UserWithToken> fetchUserToken(String email,String password) async {
     // If the server did not return a 200 OK response,
     // then throw an exception.
     print(response.statusCode);
+    print('fail in user_token');
     throw Exception('Failed to load album');
   }
 }
