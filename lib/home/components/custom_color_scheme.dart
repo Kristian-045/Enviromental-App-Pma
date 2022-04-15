@@ -4,4 +4,5 @@ extension CustomColorScheme on ColorScheme {
   Color get secondaryColor => const Color(0xfff3fcf4);
   Color get mutedColor => const Color(0xffcfd6cf);
   Color get dangerColor => const Color(0xFFdc3545);
+  Color get errorToast => const Color(0xA1FF7679);
 }

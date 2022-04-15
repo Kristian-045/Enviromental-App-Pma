@@ -2,7 +2,9 @@ import 'package:auth/api/user_register.dart';
 import 'package:auth/auth/components/button.dart';
 import 'package:auth/auth/components/input.dart';
 import 'package:auth/home/components/background.dart';
+import 'package:auth/home/components/custom_color_scheme.dart';
 import 'package:auth/home/main_home.dart';
+import 'package:auth/login/main_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,15 +31,22 @@ class BodyRegister extends StatelessWidget {
       nameController.dispose();
       passwordController.dispose();
     }
-    Future<Function?> btnOnPress () async {
-      try{
-        var userData = await fetchUserTokenRegister(emailController.text,nameController.text,passwordController.text)
-            .timeout(const Duration(seconds: 10));
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>MainHome(name: userData.name)));
+    String validator(String email, String name, String password){
+      //email
+      if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email)){
+        return "zadali ste zle mail";
       }
-      on Exception catch(e){}
-    }
+      //name
+      if(name.length<4) {
+        return "Meno musí mať minimálne 4 znaky";
+      }
+      //pass
+      if(password.length<6) {
+        return "Heslo musí mať minimálne 6 znakov";
+      }
 
+      return "true";
+    }
     return
       Stack(
         children: [
@@ -82,24 +91,43 @@ class BodyRegister extends StatelessWidget {
                                   ),
                                   onPressed: () async {
                                     try{
-                                      var userData = await fetchUserTokenRegister(emailController.text,nameController.text,passwordController.text)
-                                          .timeout(const Duration(seconds: 10));
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MainHome(name: userData.name)));
+                                      String validate = validator(emailController.text, nameController.text, passwordController.text);
+                                      if(validate=="true"){
+                                        var user_data = await fetchUserToken(emailController.text,passwordController.text)
+                                            .timeout(const Duration(seconds: 10));
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainHome(name: user_data.name)));
+                                      }else{
+                                        FocusManager.instance.primaryFocus?.unfocus();
+                                        final snackBar = SnackBar(
+                                          content: Text(validate,textAlign: TextAlign.center,),
+                                          backgroundColor: Theme.of(context).colorScheme.errorToast,
+
+                                        );
+                                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                      }
+
                                     }
                                     on Exception catch(e){}
                                   },
-                                  child: Text("Prihlásiť sa",style: TextStyle(fontSize: 17,),)),
+                                  child: const Text("Registrovať sa",style: TextStyle(fontSize: 17,),)),
                             ),
                             // Button(onPressfunction: btnOnPress(), text:"Registrovať sa",),
 
                             Padding(padding: const EdgeInsets.only(top: 8)),
-                            const Text("Vytvoriť účet",
-                              style: TextStyle(
-                                // color: Theme.of(context).primaryColor,
-                                  color: Colors.black,
-                                  decoration: TextDecoration.underline
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacement(context,
+                                    MaterialPageRoute(builder: (context) => Login()));
+                                },
+                                child: const Text("Prihlásiť sa",
+                                  style: TextStyle(
+                                    // color: Theme.of(context).primaryColor,
+                                      color: Colors.black,
+                                      decoration: TextDecoration.underline
+                                  ),
+                                ),
                               ),
-                            )
+
 
 
                           ],

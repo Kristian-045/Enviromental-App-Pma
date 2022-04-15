@@ -11,7 +11,8 @@ class Input extends StatelessWidget {
   Widget build(BuildContext context) {
     bool hideText = text == "Heslo" ? true : false ;
     return Container(
-      child: TextField(
+      child: TextFormField(
+
         textAlign: TextAlign.center,
         cursorColor: Colors.black,
         obscureText: hideText,

@@ -1,6 +1,8 @@
 import 'package:auth/auth/components/button.dart';
 import 'package:auth/auth/components/input.dart';
+import 'package:auth/home/components/custom_color_scheme.dart';
 import 'package:auth/home/main_home.dart';
+import 'package:auth/register/main_register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,6 +27,20 @@ class BodyLogin extends StatelessWidget {
       emailController.dispose();
       passwordController.dispose();
     }
+    String validator(String email, String password){
+      //email
+      if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email)){
+        return "zadali ste zle mail";
+      }
+      //pass
+      if(password.length<6) {
+        return "Heslo musí mať minimálne 6 znakov";
+      }
+
+      return "true";
+    }
+
+
     return
       Stack(
       children: [
@@ -54,15 +70,15 @@ class BodyLogin extends StatelessWidget {
                   children: [
                     Text("Prihlásenie",style: Theme.of(context).textTheme.headline1,),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 35 ,vertical: 20),
-                      margin: EdgeInsets.symmetric(horizontal: 20 ,vertical: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 35 ,vertical: 20),
+                      margin: const EdgeInsets.symmetric(horizontal: 20 ,vertical: 20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
                         children: [
                           Input(controller: emailController, text: "E-mail"),
-                          Padding(padding: const EdgeInsets.only(top: 13)),
+                          const Padding(padding: EdgeInsets.only(top: 13)),
                           Input(controller: passwordController, text: "Heslo"),
 
                           Padding(
@@ -70,22 +86,40 @@ class BodyLogin extends StatelessWidget {
                             child:
                             Button(onPressfunction: () async {
                                 try{
-                                  var user_data = await fetchUserToken(emailController.text,passwordController.text).timeout(const Duration(seconds: 5));
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MainHome(name: user_data.name)));
+                                  String validate = validator(emailController.text, passwordController.text);
+                                  if(validate=="true"){
+                                    var user_data = await fetchUserToken(emailController.text,passwordController.text)
+                                        .timeout(const Duration(seconds: 10));
+                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainHome(name: user_data.name)));
+                                  }else{
+                                    FocusManager.instance.primaryFocus?.unfocus();
+                                    final snackBar = SnackBar(
+                                      content: Text(validate,textAlign: TextAlign.center,),
+                                      backgroundColor: Theme.of(context).colorScheme.errorToast,
+
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
+
                                 }
                                 on Exception catch(e){}
                               }, text: 'Prihlásiť sa', color: true,)
 
                           ),
-                          Padding(padding: EdgeInsets.only(top: 8)),
-                          const Text("Vytvoriť účet",
-                            style: TextStyle(
-                              // color: Theme.of(context).primaryColor,
-                              color: Colors.black,
-                              decoration: TextDecoration.underline
-                            ),
-                          )
 
+                          const Padding(padding: EdgeInsets.only(top: 8)),
+
+                          GestureDetector(
+                            onTap: (){ Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context)=>const Register() )); },
+                            child:const Text("Vytvoriť účet",
+                              style: TextStyle(
+                                // color: Theme.of(context).primaryColor,
+                                  color: Colors.black,
+                                  decoration: TextDecoration.underline
+                              ),
+                            ) ,
+                          ),
 
                         ],
                       ),

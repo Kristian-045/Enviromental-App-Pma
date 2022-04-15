@@ -51,12 +51,12 @@ class BodyIntroduction extends StatelessWidget {
                   ),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   ButtonNavigate(onPressfunction:()
-                    { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const Login() ));}
+                    { Navigator.push(context, MaterialPageRoute(builder: (context)=> const Login() ));}
                     , text: 'Prihlásiť sa', color: true,
                   ),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   ButtonNavigate(onPressfunction:()
-                  { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const Register() ));}
+                  { Navigator.push(context, MaterialPageRoute(builder: (context)=> const Register() ));}
                     , text: 'Registrovať sa', color: false,
                   ),
 
