@@ -9,7 +9,7 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return const Scaffold(
-        resizeToAvoidBottomInset:true,
+        // resizeToAvoidBottomInset:false,
         body: BodyRegister()
     );
   }

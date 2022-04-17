@@ -16,7 +16,7 @@ class Login extends StatelessWidget {
 
 
     return  const Scaffold(
-      resizeToAvoidBottomInset:false,
+      // resizeToAvoidBottomInset:false,
       body: BodyLogin()
     );
   }
