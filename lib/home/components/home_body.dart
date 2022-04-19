@@ -1,3 +1,10 @@
+import 'package:auth/auth/components/button.dart';
+import 'package:auth/exam/main_exam.dart';
+import 'package:auth/home/components/background.dart';
+import 'package:auth/home/components/card.dart';
+import 'package:auth/home/components/custom_color_scheme.dart';
+import 'package:auth/home/components/home_hello.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -5,48 +12,57 @@ class HomeBody extends StatelessWidget {
   const HomeBody({Key? key, required this.name}) : super(key: key);
   final String name;
 
+
   @override
   Widget build(BuildContext context) {
+    final double width100 = MediaQuery.of(context).size.width;
+    final double height100 = MediaQuery.of(context).size.height ;
     Size size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 50),
-            width: size.width,
-            height: 400,
-            decoration: BoxDecoration(
-              color: Colors.teal,
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50),bottomRight: Radius.circular(50))
-            ),
-            child:
-              Column(
-                children: [
-                  Container(
-                    margin:EdgeInsets.only(top: 10),
-                    // padding: EdgeInsets.all(50),
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.all(Radius.circular(10000)),
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/avatar.png"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    // child: Image (image: AssetImage("assets/images/avatar.png"),),
+    return Stack(
+      children:  [
+        const BackgroundGradient(),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              Hello(name: name,),
+              const Padding(padding: EdgeInsets.only(top: 60)),
+              Container(
+                height: height100*0.45,
+                child: CarouselSlider.builder(
+                  options:CarouselOptions(
+                    height: 400,
+                    viewportFraction: 0.7,
+                    enlargeCenterPage: true,
                   ),
-                  Container(
-                    padding: EdgeInsets.only(top: 16),
-                    child:Text(name,style: TextStyle(fontSize: 30,color: Colors.white),),
-                  ),
-                ],
+                  itemCount: 6,
+                  itemBuilder: (context, index, realIndex) {
+                    // final urlImage = urlImages [index];
+                    return buildImage (index);
+                  },
+                ), // CarouselSlider.builder
               ),
+              const Padding(padding: EdgeInsets.only(top: 80)),
+              ButtonNavigate(onPressfunction: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const Exam()));
+              }, 
+                  text: "Otestuj sa", color:true
+              )
+
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
+}
+
+
+Widget buildImage(int index){
+  return Container(
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      child: HeroCard(index: index,),
+
+  );
 }

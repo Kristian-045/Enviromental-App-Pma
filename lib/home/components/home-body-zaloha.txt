@@ -1,0 +1,44 @@
+import 'package:auth/home/components/background.dart';
+import 'package:auth/home/components/card.dart';
+import 'package:auth/home/components/home_hello.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+class HomeBody extends StatelessWidget {
+  const HomeBody({Key? key, required this.name}) : super(key: key);
+  final String name;
+
+
+  @override
+  Widget build(BuildContext context) {
+    final double width100 = MediaQuery.of(context).size.width;
+    final double height100 = MediaQuery.of(context).size.height ;
+    Size size = MediaQuery.of(context).size;
+    return Stack(
+      children:  [
+        const BackgroundGradient(),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              Hello(name: name,),
+              const Padding(padding: EdgeInsets.only(top: 50)),
+              Container(
+                color: Colors.green,
+                height: height100*0.45,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    Padding(padding:EdgeInsets.only(left: 30)),
+                    HeroCard(),
+                  ],
+                ),
+              )
+
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

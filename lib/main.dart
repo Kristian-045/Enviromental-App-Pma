@@ -67,8 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _loadTokenLocal() async {
     final prefs = await SharedPreferences.getInstance();
-    //len zatial kym robim register
-    // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const Register()));
+    //len zatial kym robim user
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const MainHome(name: "kristianko")));
 
     setState(() {
       token = (prefs.getString('token') ?? "0");
