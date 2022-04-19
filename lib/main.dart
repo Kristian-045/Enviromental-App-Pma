@@ -9,6 +9,8 @@ import 'package:auth/register/main_register.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'card/main_card.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -68,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _loadTokenLocal() async {
     final prefs = await SharedPreferences.getInstance();
     //len zatial kym robim user
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const MainHome(name: "kristianko")));
+    // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const MainHome(name: "Kristianko")));
 
     setState(() {
       token = (prefs.getString('token') ?? "0");

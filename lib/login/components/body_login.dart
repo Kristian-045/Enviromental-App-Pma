@@ -72,7 +72,10 @@ class BodyLogin extends StatelessWidget {
                                     if(_formKey.currentState!.validate()){
                                       var user_data = await fetchUserToken(emailController.text,passwordController.text)
                                           .timeout(const Duration(seconds: 10));
-                                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainHome(name: user_data.name)));
+                                      Navigator.pushAndRemoveUntil(
+                                          context, MaterialPageRoute(builder: (context)=>MainHome(name: user_data.name)),
+                                          ModalRoute.withName("/Home")
+                                      );
                                     }else{
                                       FocusManager.instance.primaryFocus?.unfocus();
                                     }

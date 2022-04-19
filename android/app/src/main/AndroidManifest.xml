@@ -2,7 +2,7 @@
     package="com.example.auth">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="auth"
+        android:label="EcoDrive"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
