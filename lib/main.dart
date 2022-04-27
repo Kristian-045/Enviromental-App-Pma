@@ -69,8 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _loadTokenLocal() async {
     final prefs = await SharedPreferences.getInstance();
-    //len zatial kym robim user
-    // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const MainHome(name: "Kristianko")));
+
 
     setState(() {
       token = (prefs.getString('token') ?? "0");
@@ -84,6 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
       }else{
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const Introduction()));
       }
+      //len zatial kym robim user
+      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const MainHome(name: "Kristianko")));
     }
     on Exception catch(e){
       if(e.toString() == "Exception: Failed to load user"){

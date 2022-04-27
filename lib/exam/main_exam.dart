@@ -4,10 +4,21 @@ class Exam extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width:400 ,
-      height: 500,
-      color: Colors.green,
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {  },
+              child: const Text("animation"),
+            ),
+            Hero(
+              tag: "title",
+              child: Text("hello"))
+          ],
+        ),
+      ),
     );
   }
 }

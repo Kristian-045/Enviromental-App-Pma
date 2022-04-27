@@ -1,4 +1,7 @@
 import 'package:auth/auth/components/button.dart';
+import 'package:auth/card/components/Article.dart';
+import 'package:auth/card/components/body_card.dart';
+import 'package:auth/card/main_card.dart';
 import 'package:auth/exam/main_exam.dart';
 import 'package:auth/home/components/background.dart';
 import 'package:auth/home/components/card.dart';
@@ -17,6 +20,7 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final double width100 = MediaQuery.of(context).size.width;
     final double height100 = MediaQuery.of(context).size.height ;
+    List <Article> articles = getArticles();
     Size size = MediaQuery.of(context).size;
     return Stack(
       children:  [
@@ -35,10 +39,10 @@ class HomeBody extends StatelessWidget {
                     viewportFraction: 0.7,
                     enlargeCenterPage: true,
                   ),
-                  itemCount: 6,
+                  itemCount: articles.length,
                   itemBuilder: (context, index, realIndex) {
                     // final urlImage = urlImages [index];
-                    return buildImage (index);
+                    return buildImage (index,context,articles[index]);
                   },
                 ), // CarouselSlider.builder
               ),
@@ -58,11 +62,15 @@ class HomeBody extends StatelessWidget {
 }
 
 
-Widget buildImage(int index){
+Widget buildImage(int index, BuildContext context, Article article){
   return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 10),
-      child: HeroCard(index: index,),
+      child: GestureDetector(
+        onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> MainCard(index:index,article: article,)));} ,
+        child:
+          HeroCard(index: index, article: article,)
+      ),
 
   );
 }

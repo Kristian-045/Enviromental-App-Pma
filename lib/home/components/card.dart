@@ -1,3 +1,4 @@
+import 'package:auth/card/components/Article.dart';
 import 'package:auth/home/components/custom_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,11 +6,13 @@ import 'package:flutter_svg/parser.dart';
 
 class HeroCard extends StatelessWidget {
   int index;
+  Article article;
 
-  HeroCard({Key? key, required this.index}) : super(key: key);
+  HeroCard({Key? key, required this.index, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     String svgPath="assets/images/electric-car.svg";
     final SvgParser parser = SvgParser();
     try {
@@ -34,20 +37,25 @@ class HeroCard extends StatelessWidget {
             Container(
               width: width100*0.9,
               height: 200,
-              child: SvgPicture.asset(
-                svgPath,
-                fit: BoxFit.contain,
-                alignment:const Alignment(-1.0,-1.0),
+              child: Hero(
+                tag: "image/$index",
+                child: SvgPicture.asset(
+                  // svgPath,
+                  article.imgPath,
+                  fit: BoxFit.contain,
+                  alignment:const Alignment(-1.0,-1.0),
+                ),
               ),
             ),
             SizedBox(
               width: width100,
-              child: const Text("Elektrocke motory",style: TextStyle(fontSize: 20),)
+              child: Text(article.title,style: TextStyle(fontSize: 20),)
             ),
+
             const Padding(padding: EdgeInsets.only(top: 20)),
             SizedBox(
                 width: width100,
-                child: Text("viac informacii ked swipne s hore ... nejaky text aktualne neviem aky",
+                child: Text(article.description,
                   style: TextStyle(color: Theme.of(context).colorScheme.mutedTextColor),)
             ),
 
