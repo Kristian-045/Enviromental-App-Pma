@@ -26,16 +26,18 @@ class HeroCard extends StatelessWidget {
       height: 400,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.greenCard,
+        color: article.parameters[1][1]!="30"?Theme.of(context).colorScheme.greenCard:Theme.of(context).colorScheme.redCard,
         borderRadius: const BorderRadius.all(Radius.circular(30)),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(padding: const EdgeInsets.only(top: 20)),
+
             Container(
               width: width100*0.9,
+              // height: 200,
               height: 200,
               child: Hero(
                 tag: "image/$index",
@@ -49,15 +51,16 @@ class HeroCard extends StatelessWidget {
             ),
             SizedBox(
               width: width100,
-              child: Text(article.title,style: TextStyle(fontSize: 20),)
+              child: Center(child: Text(article.title,style: TextStyle(fontSize: 20),))
             ),
 
             const Padding(padding: EdgeInsets.only(top: 20)),
             SizedBox(
                 width: width100,
-                child: Text(article.description,
+                child: Text(article.introduction.substring(0,45)+" ...",
                   style: TextStyle(color: Theme.of(context).colorScheme.mutedTextColor),)
             ),
+
 
           ],
         ),

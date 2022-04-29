@@ -1,6 +1,7 @@
 
 import 'package:auth/auth/components/button.dart';
 import 'package:auth/home/components/custom_color_scheme.dart';
+import 'package:auth/home/main_home.dart';
 import 'package:auth/login/main_login.dart';
 import 'package:auth/register/main_register.dart';
 import 'package:flutter/material.dart';
@@ -42,10 +43,11 @@ class BodyIntroduction extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 60.0, left: 10,right: 10),
                     child: SizedBox(
                       width: width100,
-                      height: height100-400,
+                      height: height100*0.5,
                       child: SvgPicture.asset(
                         "assets/images/introductionSvg.svg",
                         fit: BoxFit.contain,
+                        alignment:const Alignment(0,-0.3),
                       ),
                     ),
                   ),
@@ -59,6 +61,11 @@ class BodyIntroduction extends StatelessWidget {
                   { Navigator.push(context, MaterialPageRoute(builder: (context)=> const Register() ));}
                     , text: 'Registrovať sa', color: false,
                   ),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
+                  GestureDetector(
+                      onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> const MainHome(name: "") ));},
+                      child:const Text("Pokračovať bez prihlásenia")
+                  )
 
 
                 ],

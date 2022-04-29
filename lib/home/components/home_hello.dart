@@ -42,9 +42,9 @@ class Hello extends StatelessWidget {
                 ),
               ],
             ),
-            const Padding(padding: EdgeInsets.only(top:30)),
+            const Padding(padding: EdgeInsets.only(top:25)),
             SizedBox(width:width100,
-              child: Text("Vyzerá že sa cítiš dobre.\nPoď sa naučiť nové veci :) \n// mozno nieco ked vam napadne nieco lepsie",
+              child: Text("Vyzerá, že sa cítiš dobre.\nPoď sa naučiť nové veci! ☺ ",
                 style: TextStyle(fontSize: 16,color:Theme.of(context).colorScheme.mutedTextColor ),),
             ),
 

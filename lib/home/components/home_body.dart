@@ -35,7 +35,7 @@ class HomeBody extends StatelessWidget {
                 height: height100*0.45,
                 child: CarouselSlider.builder(
                   options:CarouselOptions(
-                    height: 400,
+                    height: 350,
                     viewportFraction: 0.7,
                     enlargeCenterPage: true,
                   ),
@@ -49,7 +49,7 @@ class HomeBody extends StatelessWidget {
               const Padding(padding: EdgeInsets.only(top: 80)),
               ButtonNavigate(onPressfunction: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>const Exam()));
-              }, 
+              },
                   text: "Otestuj sa", color:true
               )
 

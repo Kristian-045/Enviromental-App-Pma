@@ -14,7 +14,8 @@ class Background extends StatelessWidget {
         height: heightBackground,
         // fit: BoxFit.cover,
         child:SvgPicture.asset(
-          "assets/images/background-flutter-big.svg",
+          // "assets/images/background-flutter-big.svg",
+          "assets/images/background-flutter-big_edited.svg",
           fit: BoxFit.cover,
           alignment:const Alignment(-1.0,-1.0),
 
@@ -36,7 +37,8 @@ class BackgroundGradient extends StatelessWidget {
       height: heightBackground,
       // fit: BoxFit.cover,
       child:SvgPicture.asset(
-        "assets/images/background-flutter-big-gradient.svg",
+        // "assets/images/background-flutter-big-gradient.svg",
+        "assets/images/background-flutter-big-gradient-zb.svg",
         fit: BoxFit.cover,
         alignment:const Alignment(-1.0,-1.0),
 
