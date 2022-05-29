@@ -29,7 +29,7 @@ class UserWithToken {
 Future<UserWithToken> fetchUserTokenRegister(String email, String name,String password) async {
 
   final response = await http
-      .post(Uri.parse('http://sl-print.eu/public/api/register'),
+      .post(Uri.parse('http://eco-app.lubovnan.sk/api/register'),
       headers:{
         // "Content-type": "application/json",
         // "Accept": "application/json",

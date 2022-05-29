@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 extension CustomColorScheme on ColorScheme {
   Color get primaryColor => const Color(0xff399d43);
   Color get secondaryColor => const Color(0xfff3fcf4);
+  Color get grayColor => const Color(0xfffafafa);
   Color get mutedColor => const Color(0xffcfd6cf);
   Color get mutedTextColor => const Color(0xff646664);
   Color get userColor => const Color(0xff676767);

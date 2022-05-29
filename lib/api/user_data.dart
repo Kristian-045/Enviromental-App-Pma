@@ -37,7 +37,7 @@ class User {
 }
 Future<User> fetchUser(String token) async {
   final response = await http
-      .get(Uri.parse('http://sl-print.eu/public/api/user'),
+      .get(Uri.parse('http://eco-app.lubovnan.sk/public/api/user'),
       headers:{
         "Content-type": "application/json",
         "Accept": "application/json",
