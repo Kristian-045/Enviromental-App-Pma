@@ -65,7 +65,7 @@ List getQuesstion(){
         {'answerText': 'Podľa pracovného cyklu', 'score': false},
         {'answerText': 'Podľa spôsobu zapálenia zmesi ', 'score': true},
       ],
-    },
+    }
 
   ];
   return _questions;

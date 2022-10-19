@@ -72,7 +72,7 @@ class _HomeBodyState extends State<HomeBody>{
                     return QuizSlider(height100: height100, quiz: quiz);
                   } else if (snapshot.hasError) {
                     print('${snapshot.error}');
-                    return Text('${snapshot.error}');
+                    return Text('Žiadne pripojenie k internetu');
                   }
 
                   // By default, show a loading spinner.

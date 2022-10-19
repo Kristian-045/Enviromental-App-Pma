@@ -1,4 +1,4 @@
-
+import 'package:flutter/services.dart';
 import 'package:auth/api/user_data.dart';
 import 'package:auth/api/user_token.dart';
 import 'package:auth/home/components/home_body.dart';
@@ -12,6 +12,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'card/main_card.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
 
